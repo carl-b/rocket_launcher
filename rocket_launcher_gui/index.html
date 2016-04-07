@@ -30,7 +30,12 @@ $(document).ready(function() {
     document.body.appendChild(canvas);
     canvas.width = SCREEN_WIDTH;
     canvas.height = SCREEN_HEIGHT;
-    setInterval(getRocketsFromServer, 5000);
+
+    // Test without server
+//    setInterval(launchMockedRocket, 3000);
+    // Get rockets from server
+    setInterval(getRocketsFromServer, 3000);
+    // Render rockets
     setInterval(loop, 1000 / 50);
 });
 
@@ -49,38 +54,38 @@ function getRocketsFromServer() {
 }
 
 function launch(rockets) {
-//  var rocket = generateRandomRocket();
-
   for(var i=0;i<rockets.length;i++) {
     var rocket = rockets[i];
     var screenX = rocket.xPosition * SCREEN_WIDTH / 100;
     launchSpecific(rocket.name, screenX, rocket.xVelocity, rocket.yVelocity,
-      rocket.color, rocket.size)
+      rocket.color, rocket.size);
   }
 }
 
+function launchMockedRocket() {
+    var rocket = generateMockedRocket();
+    console.log(rocket);
+    launchSpecific(rocket.name, rocket.xPosition, rocket.xVelocity, rocket.yVelocity,
+      rocket.color, rocket.size);
+}
 
-function generateRandomRocket() {
-  var xPosition = Math.random() * SCREEN_WIDTH * 2 / 3 + SCREEN_WIDTH / 6;
-  var color = Math.floor(Math.random() * 360 / 10) * 10;
-  var yVelocity = Math.random() * -6 - 4;
-  var xVelocity  = Math.random() * 6 - 3;
-  var size = Math.random() * 10 + 2;
-  var shrink = 0.999;
-  var gravity = 0.001;
+function generateMockedRocket() {
+    var xPosition = Math.random() * SCREEN_WIDTH * 2 / 3 + SCREEN_WIDTH / 6;
+    var color = Math.floor(Math.random() * 360 / 10) * 10;
+    var yVelocity = Math.random() * -6 - 4;
+    var xVelocity  = Math.random() * 6 - 3;
+    var size = Math.random() * 10 + 2;
 
-  var rocket = {
-    "name": "GAUTE",
-    "xPosition": xPosition,
-    "yVelocity": yVelocity,
-    "xVelocity": xVelocity,
-    "color": color,
-    "size": size,
-    "shrink": shrink,
-    "gravity": gravity
-  };
+    var rocket = {
+      "name": "",
+      "xPosition": xPosition,
+      "yVelocity": yVelocity,
+      "xVelocity": xVelocity,
+      "color": color,
+      "size": size
+    };
 
-  return rocket;
+    return rocket;
 }
 
 
