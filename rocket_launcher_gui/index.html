@@ -30,16 +30,33 @@ $(document).ready(function() {
     document.body.appendChild(canvas);
     canvas.width = SCREEN_WIDTH;
     canvas.height = SCREEN_HEIGHT;
-    setInterval(launch, 1000);
+    setInterval(getRocketsFromServer, 5000);
     setInterval(loop, 1000 / 50);
 });
 
+var url = 'http://localhost:8080/getRockets';
+function getRocketsFromServer() {
+    $.ajax({
+        cache: false,
+        type: "GET",
+        dataType: 'json',
+        url: url
+    }).success(function(data) {
+        launch(data);
+    }).error(function(xhr, ajaxOptions, thrownError) {
+        displayError();
+    });
+}
 
-function launch() {
-  var rocket = generateRandomRocket();
+function launch(rockets) {
+//  var rocket = generateRandomRocket();
 
-  launchSpecific(rocket.name, rocket.xPosition, rocket.xVelocity, rocket.yVelocity,
-    rocket.color, rocket.size, rocket.shrink, rocket.gravity)
+  for(var i=0;i<rockets.length;i++) {
+    var rocket = rockets[i];
+    var screenX = rocket.xPosition * SCREEN_WIDTH / 100;
+    launchSpecific(rocket.name, screenX, rocket.xVelocity, rocket.yVelocity,
+      rocket.color, rocket.size)
+  }
 }
 
 
@@ -67,8 +84,10 @@ function generateRandomRocket() {
 }
 
 
-function launchSpecific(name, xPosition, xVelocity, yVelocity, color, size, shrink, gravity) {
-    if (rockets.length < 50) {
+function launchSpecific(name, xPosition, xVelocity, yVelocity, color, size) {
+    var shrink = 0.999;
+    var gravity = 0.001;
+    if (rockets.length < 10) {
         var rocket = new Rocket(xPosition);
         rocket.name = name;
         rocket.explosionColor = color;
