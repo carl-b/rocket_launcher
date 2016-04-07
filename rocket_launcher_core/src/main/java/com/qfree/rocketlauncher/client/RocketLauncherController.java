@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qfree.rocketlauncher.model.Rocket;
+
 @Controller
 @EnableAutoConfiguration
 public class RocketLauncherController {
+
 
     @RequestMapping("/")
     @ResponseBody
@@ -24,11 +27,26 @@ public class RocketLauncherController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> getAvailableLists() {
-        final List<String> actionLists = new ArrayList<>();
-        actionLists.add("test1");
-        return new ResponseEntity<>(actionLists, getResponseHeaders(), HttpStatus.OK);
+    @RequestMapping(value = "/getRockets", method = RequestMethod.GET)
+    public ResponseEntity<List<Rocket>> getRockets() {
+
+        final List<Rocket> rockets = new ArrayList<>();
+
+        rockets.add(generateRandomRocket());
+
+        return new ResponseEntity<>(rockets, getResponseHeaders(), HttpStatus.OK);
+    }
+
+
+    private Rocket generateRandomRocket() {
+        return new Rocket.Builder()
+                .setName("Random")
+                .setColor(String.valueOf(Math.floor(Math.random() * 360 / 10) * 10))
+                .setxPosition((int) (Math.random() * 100))
+                .setyVelocity((int) (Math.random() * -6 - 4))
+                .setxVelocity((int) (Math.random() * 6 - 3))
+                .setSize((int) (Math.random() * 10 + 2))
+                .build();
     }
 
     private static HttpHeaders getResponseHeaders() {
