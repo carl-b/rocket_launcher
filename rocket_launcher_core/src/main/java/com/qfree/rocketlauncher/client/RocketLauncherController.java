@@ -32,9 +32,9 @@ public class RocketLauncherController {
 
     @ResponseBody
     @RequestMapping(value = "/getRockets", method = RequestMethod.GET)
-    public ResponseEntity<List<Rocket>> getRockets() {
+    public ResponseEntity<List<JsonRocket>> getRockets() {
 
-        final List<Rocket> rockets = new ArrayList<>();
+        final List<JsonRocket> rockets = new ArrayList<>();
 
         rockets.add(generateRandomRocket());
 
@@ -52,15 +52,15 @@ public class RocketLauncherController {
 
 
 
-    private Rocket generateRandomRocket() {
-        return new Rocket.Builder()
-                .setName("Random")
-                .setColor(String.valueOf(Math.floor(Math.random() * 360 / 10) * 10))
-                .setxPosition((int) (Math.random() * 100))
-                .setyVelocity((int) (Math.random() * -6 - 4))
-                .setxVelocity((int) (Math.random() * 6 - 3))
-                .setSize((int) (Math.random() * 10 + 2))
-                .build();
+    private JsonRocket generateRandomRocket() {
+        return new JsonRocket(
+                -1,
+                "Random",
+                (int) (Math.random() * 100),
+                (int) (Math.random() * -6 - 4),
+                (int) (Math.random() * 6 - 3),
+                String.valueOf(Math.floor(Math.random() * 360 / 10) * 10),
+                (int) (Math.random() * 10 + 2));
     }
 
     private static HttpHeaders getResponseHeaders() {
