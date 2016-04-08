@@ -1,10 +1,10 @@
 package com.qfree.rocketlauncher.model;
 
-import com.qfree.rocketlauncher.tools.AtomicCounter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Rocket {
 
-    private final long id;
+    private final int id;
     private final String name;
     private final int xPosition;
     private final int yVelocity;
@@ -12,7 +12,7 @@ public class Rocket {
     private final String color;
     private final int size;
 
-    private Rocket(long id, String name, int xPosition, int yVelocity, int xVelocity, String color, int size) {
+    private Rocket(int id, String name, int xPosition, int yVelocity, int xVelocity, String color, int size) {
         this.id = id;
         this.name = name;
         this.xPosition = xPosition;
@@ -22,7 +22,7 @@ public class Rocket {
         this.size = size;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -63,8 +63,21 @@ public class Rocket {
                 '}';
     }
 
+    @JsonIgnore
+    public Builder getBuilder() {
+        return new Builder()
+                .setId(id)
+                .setName(name)
+                .setColor(color)
+                .setSize(size)
+                .setxPosition(xPosition)
+                .setyVelocity(yVelocity)
+                .setxVelocity(xVelocity);
+    }
+
+
     public static class Builder {
-        private long id;
+        private int id;
         private String name;
         private int xPosition;
         private int yVelocity;
@@ -72,10 +85,12 @@ public class Rocket {
         private String color;
         private int size;
 
-        public Builder() {
-            id = AtomicCounter.getNext();
-        }
+        public Builder() { }
 
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
         public Builder setName(String name) {
             this.name = name;
             return this;
