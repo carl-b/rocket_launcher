@@ -38,15 +38,16 @@ public class RocketLauncherServiceLayer {
         return rocketsToLaunch;
     }
 
-    public boolean launchRocket(final int id) {
+    public JsonRocket launchRocket(final int id) {
         final Rocket rocketToLaunch = rocketLauncherPersistenceLayer.getRocket(id);
         if (rocketToLaunch != null) {
             log.info("Launching rocket with id: {}, created by: {}", rocketToLaunch.getId(), rocketToLaunch.getName() );
 
-            rocketsReadyForLaunch.add(toJsonRocket(rocketToLaunch));
-            return true;
+            final JsonRocket jsonRocket = toJsonRocket(rocketToLaunch);
+            rocketsReadyForLaunch.add(jsonRocket);
+            return jsonRocket;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -61,7 +62,7 @@ public class RocketLauncherServiceLayer {
      * Get a rocket by ID. If the id does not exist, null is returned
      */
     public JsonRocket getRocket(final int id) {
-        log.info("Creating rocket by id: {}", id );
+        log.info("Get rocket by id: {}", id );
         return toJsonRocket(rocketLauncherPersistenceLayer.getRocket(id));
     }
 

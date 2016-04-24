@@ -5,13 +5,18 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import com.qfree.rocketlauncher.client.RocketLauncherController;
 import com.qfree.rocketlauncher.client.RocketManagementController;
+import com.qfree.rocketlauncher.client.errorhandling.RestServiceExceptionHandler;
 import com.qfree.rocketlauncher.config.RocketLauncherConfig;
 
 @EnableAutoConfiguration
 public class StartRocketLauncher {
 
-    private final static Class[] configurationClasses
-            = { RocketLauncherController.class, RocketManagementController.class,  RocketLauncherConfig.class };
+    private final static Class[] configurationClasses = {
+            RocketLauncherController.class,
+            RocketManagementController.class,
+            RestServiceExceptionHandler.class,
+            RocketLauncherConfig.class
+    };
 
     public static void main(String args[]) {
 
