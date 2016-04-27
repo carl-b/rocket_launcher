@@ -55,22 +55,16 @@ function getRocketsFromServer() {
 }
 
 function launch(rockets) {
-
-  //console.log(rockets);
-
   for(var i=0;i<rockets.length;i++) {
     var rocket = rockets[i];
     var screenX = rocket.xPosition * SCREEN_WIDTH / 100;
     launchSpecific(rocket.name, screenX, rocket.xVelocity, rocket.yVelocity,
       rocket.color, rocket.size);
   }
-
-
 }
 
 function launchMockedRocket() {
     var rocket = generateMockedRocket();
-    console.log(rocket);
     launchSpecific(rocket.name, rocket.xPosition, rocket.xVelocity, rocket.yVelocity,
       rocket.color, rocket.size);
 }
