@@ -32,14 +32,15 @@ $(document).ready(function() {
     canvas.height = SCREEN_HEIGHT;
 
     // Test without server
-//    setInterval(launchMockedRocket, 3000);
+    //setInterval(launchMockedRocket, 3000);
     // Get rockets from server
-    setInterval(getRocketsFromServer, 3000);
+    setInterval(getRocketsFromServer, 500);
     // Render rockets
     setInterval(loop, 1000 / 50);
 });
 
-var url = 'http://localhost:8080/getRockets';
+var url = 'http://192.168.6.80:8080/getRocketsOnQueue';
+//var url = 'http://192.168.6.80:8080/getRockets';
 function getRocketsFromServer() {
     $.ajax({
         cache: false,
@@ -54,12 +55,17 @@ function getRocketsFromServer() {
 }
 
 function launch(rockets) {
+
+  //console.log(rockets);
+
   for(var i=0;i<rockets.length;i++) {
     var rocket = rockets[i];
     var screenX = rocket.xPosition * SCREEN_WIDTH / 100;
     launchSpecific(rocket.name, screenX, rocket.xVelocity, rocket.yVelocity,
       rocket.color, rocket.size);
   }
+
+
 }
 
 function launchMockedRocket() {
@@ -77,7 +83,7 @@ function generateMockedRocket() {
     var size = Math.random() * 10 + 2;
 
     var rocket = {
-      "name": "",
+      "name": "RANDOM",
       "xPosition": xPosition,
       "yVelocity": yVelocity,
       "xVelocity": xVelocity,
@@ -92,7 +98,14 @@ function generateMockedRocket() {
 function launchSpecific(name, xPosition, xVelocity, yVelocity, color, size) {
     var shrink = 0.999;
     var gravity = 0.001;
-    if (rockets.length < 10) {
+
+    if(xPosition == 0) xPosition = 50;
+    if(xVelocity == 0) xVelocity = 0;
+    if(yVelocity == 0) yVelocity = Math.random() * -6 - 4;
+    if(color == 0) color = 137;
+    if(size == 0) size = 5;
+
+    if (rockets.length < 20) {
         var rocket = new Rocket(xPosition);
         rocket.name = name;
         rocket.explosionColor = color;
