@@ -55,7 +55,7 @@ public class RocketLauncherServiceLayer {
      */
     public JsonRocket createRocket(final JsonInputRocket rocket) {
         log.info("Creating rocket created by: {}", rocket.getName() );
-        return toJsonRocket(rocketLauncherPersistenceLayer.createRocket(toRocket(rocket)));
+        return toJsonRocket(rocketLauncherPersistenceLayer.createRocket(toRocket(rocket, 0)));
     }
 
     /**
@@ -90,7 +90,7 @@ public class RocketLauncherServiceLayer {
      */
     public JsonRocket updateRocket(final int id, final JsonInputRocket rocket) {
         log.info("Updating rocket with id: '{}'", id );
-        return toJsonRocket(rocketLauncherPersistenceLayer.updateRocket(id, toRocket(rocket)));
+        return toJsonRocket(rocketLauncherPersistenceLayer.updateRocket(id, toRocket(rocket, id)));
     }
 
     /**
@@ -127,7 +127,7 @@ public class RocketLauncherServiceLayer {
                 rocket.getSize());
     }
 
-    private Rocket toRocket(final JsonInputRocket jsonInputRocket) {
+    private Rocket toRocket(final JsonInputRocket jsonInputRocket, final int id) {
         if (jsonInputRocket == null) {
             return null;
         }
@@ -138,6 +138,7 @@ public class RocketLauncherServiceLayer {
                 .setxVelocity(jsonInputRocket.getxVelocity())
                 .setColor(jsonInputRocket.getColor())
                 .setSize(jsonInputRocket.getSize())
+                .setId(id)
                 .build();
 
     }
