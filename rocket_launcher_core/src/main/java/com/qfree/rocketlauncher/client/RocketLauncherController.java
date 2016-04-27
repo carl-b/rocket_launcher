@@ -59,7 +59,7 @@ public class RocketLauncherController {
                 (int) (Math.random() * 100),
                 (int) (Math.random() * -6 - 4),
                 (int) (Math.random() * 6 - 3),
-                String.valueOf(Math.floor(Math.random() * 360 / 10) * 10),
+                (int) Math.floor(Math.random() * 360 / 10) * 10,
                 (int) (Math.random() * 10 + 2));
     }
 

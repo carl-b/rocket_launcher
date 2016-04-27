@@ -34,7 +34,7 @@ public class RocketManagementController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JsonRocket> createRocket(@RequestBody final JsonInputRocket rocket) {
 
-        ControllerHelper.validateCreateRocket(rocket);
+        ControllerHelper.validateInputRocket(rocket);
 
         final JsonRocket createdRocket = rocketLauncherServiceLayer.createRocket(rocket);
 
@@ -67,7 +67,7 @@ public class RocketManagementController {
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ResponseEntity<JsonRocket> updateRocket(@PathVariable final String id, @RequestBody final JsonInputRocket rocket) {
         ControllerHelper.validateIntParameter(id);
-        ControllerHelper.validateCreateRocket(rocket);
+        ControllerHelper.validateInputRocket(rocket);
 
         final JsonRocket updatedRocket =  rocketLauncherServiceLayer.updateRocket(Integer.parseInt(id), rocket);
 

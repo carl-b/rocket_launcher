@@ -10,12 +10,32 @@ import com.qfree.rocketlauncher.model.JsonRocket;
 
 public class ControllerHelper {
 
-    public static void validateCreateRocket(final JsonInputRocket rocket) {
+    public static void validateInputRocket(final JsonInputRocket rocket) {
         if (rocket == null) {
             throw new RestServiceException(ErrorCode.INVALID_REQUEST_NO_ROCKET);
         }
         if (rocket.getName() == null || rocket.getName().isEmpty()) {
             throw new RestServiceException(ErrorCode.INVALID_REQUEST_NO_NAME);
+        }
+
+        if (rocket.getSize() < 0 || rocket.getSize() > 1000) {
+            throw new RestServiceException(ErrorCode.INVALID_REQUEST_PARAMETER_VALUE, "Invalid value for parameter 'size'. Min: 0, Max: 1000");
+        }
+
+        if (rocket.getxPosition() < 0 || rocket.getxPosition() > 100) {
+            throw new RestServiceException(ErrorCode.INVALID_REQUEST_PARAMETER_VALUE, "Invalid value for parameter 'xPosition'. Min: 0, Max: 100");
+        }
+
+        if (rocket.getyVelocity() < -20 || rocket.getyVelocity() > 0) {
+            throw new RestServiceException(ErrorCode.INVALID_REQUEST_PARAMETER_VALUE, "Invalid value for parameter 'yVelocity'. Min: -20, Max: 0");
+        }
+
+        if (rocket.getxVelocity() < -50 || rocket.getxVelocity() > 50) {
+            throw new RestServiceException(ErrorCode.INVALID_REQUEST_PARAMETER_VALUE, "Invalid value for parameter 'xVelocity'. Min: -50, Max: 50");
+        }
+
+        if (rocket.getColor() < 0 || rocket.getColor() > 360) {
+            throw new RestServiceException(ErrorCode.INVALID_REQUEST_PARAMETER_VALUE, "Invalid value for parameter 'color'. Min: 0, Max: 360");
         }
     }
 

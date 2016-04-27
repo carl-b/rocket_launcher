@@ -7,7 +7,7 @@ public class JsonRocket extends JsonInputRocket {
     public JsonRocket() {
     }
 
-    public JsonRocket(int id, String name, int xPosition, int yVelocity, int xVelocity, String color, int size) {
+    public JsonRocket(int id, String name, int xPosition, int yVelocity, int xVelocity, int color, int size) {
         super(name, xPosition, yVelocity, xVelocity, color, size);
         this.id = id;
     }

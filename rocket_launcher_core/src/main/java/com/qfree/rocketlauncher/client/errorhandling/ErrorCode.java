@@ -9,6 +9,10 @@ public enum ErrorCode {
     INVALID_REQUEST_INVALID_INT_PARAMETER(102, "Could not parse integer parameter", HttpStatus.BAD_REQUEST),
     INVALID_REQUEST_ROCKET_NOT_FOUND(103, "The rocket was not found", HttpStatus.NOT_FOUND),
 
+    INVALID_REQUEST_PARAMETER_VALUE(103, "Parameter has invalid value", HttpStatus.BAD_REQUEST),
+
+    NOT_IMPLEMENTED(800, "The methos is not implemented yet", HttpStatus.INTERNAL_SERVER_ERROR),
+
     UNKNOWN_ERROR(900, "Unknown error", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final int errorCode;

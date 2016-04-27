@@ -9,10 +9,10 @@ public class Rocket {
     private final int xPosition;
     private final int yVelocity;
     private final int xVelocity;
-    private final String color;
+    private final int color;
     private final int size;
 
-    private Rocket(int id, String name, int xPosition, int yVelocity, int xVelocity, String color, int size) {
+    private Rocket(int id, String name, int xPosition, int yVelocity, int xVelocity, int color, int size) {
         this.id = id;
         this.name = name;
         this.xPosition = xPosition;
@@ -42,7 +42,7 @@ public class Rocket {
         return xVelocity;
     }
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
@@ -58,7 +58,7 @@ public class Rocket {
                 ", xPosition=" + xPosition +
                 ", yVelocity=" + yVelocity +
                 ", xVelocity=" + xVelocity +
-                ", color='" + color + '\'' +
+                ", color=" + color +
                 ", size=" + size +
                 '}';
     }
@@ -82,7 +82,7 @@ public class Rocket {
         private int xPosition;
         private int yVelocity;
         private int xVelocity;
-        private String color;
+        private int color;
         private int size;
 
         public Builder() { }
@@ -111,7 +111,7 @@ public class Rocket {
             return this;
         }
 
-        public Builder setColor(String color) {
+        public Builder setColor(int color) {
             this.color = color;
             return this;
         }

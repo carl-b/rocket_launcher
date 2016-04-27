@@ -8,13 +8,13 @@ public class JsonInputRocket {
     private int xPosition;
     private int yVelocity;
     private int xVelocity;
-    private String color;
+    private int color;
     private int size;
 
     public JsonInputRocket() {
     }
 
-    public JsonInputRocket(String name, int xPosition, int yVelocity, int xVelocity, String color, int size) {
+    public JsonInputRocket(String name, int xPosition, int yVelocity, int xVelocity, int color, int size) {
         this.name = name;
         this.xPosition = xPosition;
         this.yVelocity = yVelocity;
@@ -55,11 +55,11 @@ public class JsonInputRocket {
         this.xVelocity = xVelocity;
     }
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.color = color;
     }
 
